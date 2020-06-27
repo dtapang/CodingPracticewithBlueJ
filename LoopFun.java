@@ -27,6 +27,8 @@ public class LoopFun
        * @return Upper case string of the first letter of each word
        */
       public String acronym(String phrase) {
+          if(phrase==null)  return null;
+          if(phrase.trim().length()<1)  return null;          
           String[] splitArray = phrase.split(" ");
           String acronym = "";
           for(String word:splitArray){
@@ -51,22 +53,19 @@ public class LoopFun
           if(word==null)  return null;
           if(word.trim().length()<1)  return null;
           String encrypted = "";
-          for(int i=0;i<word.length()-1;i++){
+          for(int i=0;i<word.length();i++){
               char charVal = word.charAt(i);
               char encryptedChar = charVal;
-              
+              charVal+=3;
               //if overflow past z
-              if(charVal+3>122)
-                encryptedChar = (char)(((charVal+3)%122)+96);
-              else if (charVal+3>90)
-                encryptedChar = (char)(((charVal+3)%90)+64);
+              if(charVal>122)
+                encryptedChar = (char)(96+(charVal%122));
               else
-                encryptedChar = (char)(charVal+3);
+                encryptedChar = (char)(charVal);
                 
               encrypted += (char)(encryptedChar);
               
           }
-          System.out.println(encrypted);
           return encrypted;
       }
 }
